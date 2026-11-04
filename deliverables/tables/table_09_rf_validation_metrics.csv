@@ -1,0 +1,5 @@
+model_key,model,feature_set,split,n_samples,mae,mse,rmse,r2,selected_by_validation
+rf_raw,Random Forest baseline,raw,validation,3096,0.338785712015504,0.2700238279543815,0.5196381702246107,0.7927306508876297,False
+rf_raw_optimized,Random Forest optimized,raw,validation,3096,0.3375508045508131,0.26786171304415707,0.5175535847080542,0.7943902827562073,True
+rf_ratio,Random Forest baseline,ratio,validation,3096,0.3407133899870803,0.27148300787498925,0.5210403130996576,0.7916105894668528,False
+rf_ratio_optimized,Random Forest optimized,ratio,validation,3096,0.3424404285501967,0.2691809552850757,0.5188265175230307,0.7933776370105772,False

@@ -1,5 +1,7 @@
 # 图片清单与建议图注
 
+> 下列 01–15 图是 A 阶段图片；B 的 16–21 图说明见 `student_b_handoff.md`。
+
 所有图片实际结果来自当前项目运行。报告版位于 `deliverables/figures/report/`，
 PPT 版位于 `deliverables/figures/ppt/`。
 

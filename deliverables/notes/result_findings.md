@@ -1,5 +1,9 @@
 # A 同学实验结果与解读
 
+> 本文保留 A 阶段的线性模型分析。B 的随机森林结果、全体模型比较与最终选择见
+> `student_b_handoff.md` 和 `../tables/final_metrics.csv`。全体验证集最优为
+> `rf_raw_optimized`，其测试 RMSE 为 0.4884。
+
 ## 模型选择
 
 在 A 负责的 Linear Regression 和 Ridge Regression 候选中，验证集 RMSE

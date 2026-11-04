@@ -1,5 +1,8 @@
 # 报告表格建议
 
+> 本文件以下保留 A 阶段表格说明。全体模型汇总以
+> `../tables/table_13_all_validation_metrics.csv` 和 `../tables/final_metrics.csv` 为准。
+
 以下表格均已由实际运行结果生成，完整精度 CSV 位于 `deliverables/tables/`。
 
 ## 验证集模型比较
