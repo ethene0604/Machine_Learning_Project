@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-11-04T08:23:05.470563+08:00",
+  "python": "3.14.6",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "matplotlib": "3.11.0",
+    "seaborn": "0.13.2",
+    "joblib": "1.5.3"
+  },
+  "dataset_path": "D:\\Myhomework\\机器学习\\data\\california_housing.csv",
+  "dataset_sha256": "7192af0bf33e94141194cfd91958c62d66262dc40c07cc2e6fbe0b2d02b0e1b3",
+  "split": {
+    "random_state": 42,
+    "target_test_size": 0.3,
+    "validation_fraction_of_temp": 0.5,
+    "counts": {
+      "train": 14448,
+      "validation": 3096,
+      "test": 3096
+    },
+    "features": [
+      "MedInc",
+      "HouseAge",
+      "AveRooms",
+      "AveBedrms",
+      "Population",
+      "AveOccup",
+      "Latitude",
+      "Longitude"
+    ],
+    "target": "MedHouseVal",
+    "train_ids_sha256": "684df3985010f625f876acf4530225433de0a8bcd5e792becb1dd01777a59593",
+    "validation_ids_sha256": "169b523abc2719d7005f98feac08e544bd3e95f40277f37d7bb14eb8082435eb",
+    "test_ids_sha256": "fa6c88e2c4347291294f5a66be1f1970df20f5e4e97ae487f0b00231736fe017"
+  },
+  "selection_rule": "lowest validation RMSE; test set evaluated once afterward",
+  "selected_linear_model": {
+    "model_key": "linear_ratio",
+    "model": "Linear Regression",
+    "feature_set": "ratio",
+    "alpha": null,
+    "cv_rmse": null,
+    "cv_rmse_std": null,
+    "validation_rmse": 0.6808652374374367
+  },
+  "selected_ridge_for_extension": {
+    "model_key": "ridge_ratio",
+    "feature_set": "ratio",
+    "alpha_sklearn": 100.0,
+    "validation_rmse": 0.6815770776622702
+  },
+  "num_by_scratch": {
+    "feature_set": "ratio",
+    "alpha_sklearn": 100.0,
+    "lambda_custom": 0.0069213732004429675,
+    "learning_rate": 0.05,
+    "iterations": 3708,
+    "converged": true
+  },
+  "elapsed_seconds": 24.897777299862355
+}

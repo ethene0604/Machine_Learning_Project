@@ -1,0 +1,24 @@
+{
+  "random_state": 42,
+  "target_test_size": 0.3,
+  "validation_fraction_of_temp": 0.5,
+  "counts": {
+    "train": 14448,
+    "validation": 3096,
+    "test": 3096
+  },
+  "features": [
+    "MedInc",
+    "HouseAge",
+    "AveRooms",
+    "AveBedrms",
+    "Population",
+    "AveOccup",
+    "Latitude",
+    "Longitude"
+  ],
+  "target": "MedHouseVal",
+  "train_ids_sha256": "684df3985010f625f876acf4530225433de0a8bcd5e792becb1dd01777a59593",
+  "validation_ids_sha256": "169b523abc2719d7005f98feac08e544bd3e95f40277f37d7bb14eb8082435eb",
+  "test_ids_sha256": "fa6c88e2c4347291294f5a66be1f1970df20f5e4e97ae487f0b00231736fe017"
+}

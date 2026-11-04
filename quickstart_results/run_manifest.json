@@ -1,0 +1,27 @@
+{
+  "random_state": 42,
+  "ridge_alpha_grid": [
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    3.0,
+    10.0,
+    30.0,
+    100.0,
+    300.0,
+    1000.0,
+    3000.0,
+    10000.0
+  ],
+  "selected_model": "linear_ratio",
+  "selected_feature_set": "ratio",
+  "selected_ridge_alpha": 100.0,
+  "scratch_learning_rate": 0.05,
+  "scratch_iterations": 3708,
+  "scratch_converged": true,
+  "test_set_policy": "locked before final evaluation"
+}
