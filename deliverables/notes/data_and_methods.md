@@ -27,7 +27,7 @@
 - 测试集：3,096 条；
 - 随机种子：42。
 
-模型选择使用验证集 RMSE；Ridge 的正则化参数使用训练集内部 5 折交叉验证选择。
+模型选择使用验证集 RMSE；Ridge 的正则化参数和随机森林超参数使用训练集内部 5 折交叉验证选择。
 测试集在模型、特征方案和参数确定后，仅用于最终评估。
 
 ## 特征工程
@@ -40,9 +40,9 @@ RoomsPerPerson   = AveRooms / (AveOccup + 1e-9)
 HouseholdsApprox = Population / (AveOccup + 1e-9)
 ```
 
-这些特征都是不依赖目标值的确定性派生变量。所有模型均使用
-`SimpleImputer -> StandardScaler` 的 Pipeline；比例特征在同一条 Pipeline
-中生成，确保训练、验证和测试使用完全相同的定义。
+这些特征都是不依赖目标值的确定性派生变量。线性模型使用
+`SimpleImputer -> StandardScaler` Pipeline；随机森林只使用插补，不进行标准化。
+比例特征在同一条 Pipeline 中生成，确保各数据集合使用完全相同的定义。
 
 ## 模型
 
@@ -56,10 +56,15 @@ min ||y - Xw||² + alpha ||w||²
 搜索范围为 `0.001～10,000` 的对数间隔候选值。最终“原始特征 + 比例特征”
 Ridge 选择 `alpha=100`，且 100 不在搜索边界。
 
+随机森林基线使用 100 棵树。原始特征和比例特征各执行 6 组参数的
+`RandomizedSearchCV`，训练集内 5 折，以负 RMSE 为评分。搜索树数、深度、
+叶节点样本数、最小分裂样本数和每次分裂使用的特征比例。
+搜索空间与最优参数记录在 `results/best_params.json`。
+
 ## 评价指标
 
-报告 MAE、MSE、RMSE 和 R²。MAE、MSE、RMSE 使用原始目标单位，即
-“10 万美元”。例如 RMSE=0.6477 表示约 6.48 万美元。
+报告 MAE、MSE、RMSE 和 R²。MAE 与 RMSE 使用目标原始单位，即
+“10 万美元”；MSE 使用其平方。例如 RMSE=0.4884 表示约 4.88 万美元。
 
 ## 从零实现
 

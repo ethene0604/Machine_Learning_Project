@@ -1,0 +1,119 @@
+{
+  "Captured": "2026-11-04T15:54:11.3930463+08:00",
+  "Tasks": [
+    {
+      "TaskName": "NvDriverUpdateCheckDaily_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
+      "TaskPath": "\\",
+      "State": 3
+    },
+    {
+      "TaskName": "NVIDIA App SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
+      "TaskPath": "\\",
+      "State": 3
+    },
+    {
+      "TaskName": "Office Automatic Updates 2.0",
+      "TaskPath": "\\Microsoft\\Office\\",
+      "State": 3
+    },
+    {
+      "TaskName": "Office Feature Updates",
+      "TaskPath": "\\Microsoft\\Office\\",
+      "State": 3
+    },
+    {
+      "TaskName": "Office Feature Updates C2R Client",
+      "TaskPath": "\\Microsoft\\Office\\",
+      "State": 3
+    },
+    {
+      "TaskName": "Office Feature Updates C2R Client Logon",
+      "TaskPath": "\\Microsoft\\Office\\",
+      "State": 3
+    },
+    {
+      "TaskName": "Office Feature Updates Logon",
+      "TaskPath": "\\Microsoft\\Office\\",
+      "State": 3
+    },
+    {
+      "TaskName": "BackgroundDownload",
+      "TaskPath": "\\Microsoft\\VisualStudio\\Updates\\",
+      "State": 3
+    },
+    {
+      "TaskName": "ScanForUpdates",
+      "TaskPath": "\\Microsoft\\Windows\\InstallService\\",
+      "State": 3
+    },
+    {
+      "TaskName": "ScanForUpdatesAsUser",
+      "TaskPath": "\\Microsoft\\Windows\\InstallService\\",
+      "State": 3
+    },
+    {
+      "TaskName": "WakeUpAndScanForUpdates",
+      "TaskPath": "\\Microsoft\\Windows\\InstallService\\",
+      "State": 1
+    },
+    {
+      "TaskName": "Scheduled Start",
+      "TaskPath": "\\Microsoft\\Windows\\WindowsUpdate\\",
+      "State": 3
+    }
+  ],
+  "Services": [
+    {
+      "Name": "edgeupdate",
+      "State": "Stopped",
+      "StartMode": "Auto"
+    },
+    {
+      "Name": "edgeupdatem",
+      "State": "Stopped",
+      "StartMode": "Manual"
+    },
+    {
+      "Name": "MuseHubUpdaterService",
+      "State": "Stopped",
+      "StartMode": "Manual"
+    },
+    {
+      "Name": "OverwolfUpdater",
+      "State": "Stopped",
+      "StartMode": "Manual"
+    },
+    {
+      "Name": "UsoSvc",
+      "State": "Running",
+      "StartMode": "Auto"
+    },
+    {
+      "Name": "WemeetUpdateSvc",
+      "State": "Stopped",
+      "StartMode": "Manual"
+    },
+    {
+      "Name": "wuauserv",
+      "State": "Running",
+      "StartMode": "Manual"
+    }
+  ],
+  "Registry": [
+    {
+      "Path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+      "Exists": false,
+      "Values": {}
+    },
+    {
+      "Path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\WindowsStore",
+      "Exists": false,
+      "Values": {}
+    },
+    {
+      "Path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Office\\16.0\\Common\\officeupdate",
+      "Exists": false,
+      "Values": {}
+    }
+  ]
+}

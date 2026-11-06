@@ -1,4 +1,4 @@
-"""Combine already-recorded A and B results without rerunning the test set."""
+"""Combine model results from saved artifacts without fitting any model."""
 
 from __future__ import annotations
 
@@ -13,11 +13,11 @@ import pandas as pd
 from src.config import METRICS_DIR, PPT_FIGURES_DIR, PREDICTIONS_DIR, REPORT_FIGURES_DIR, RESULTS_DIR, TABLES_DIR
 
 
-def main() -> None:
+def main() -> dict:
     lock = json.loads((RESULTS_DIR / "rf_selection_lock.json").read_text(encoding="utf-8"))
     selected_key = lock["selected_model_key"]
-    a = pd.read_csv(METRICS_DIR / "student_a_metrics.csv")
-    b = pd.read_csv(METRICS_DIR / "student_b_rf_metrics.csv")
+    a = pd.read_csv(METRICS_DIR / "linear_metrics.csv")
+    b = pd.read_csv(METRICS_DIR / "rf_metrics.csv")
     a = a[a.model_key != "numpy_ridge_gd"].copy()
     b_selected = b[b.model_key == selected_key].copy()
 
@@ -74,6 +74,7 @@ def main() -> None:
     for directory, dpi in ((REPORT_FIGURES_DIR, 300), (PPT_FIGURES_DIR, 220)):
         fig.savefig(directory / "21_all_model_validation_comparison.png", dpi=dpi, bbox_inches="tight", facecolor="white")
     plt.close(fig)
+    return {"selected_model_key": overall_key, "validation_rmse": float(validation.rmse.min())}
 
 
 if __name__ == "__main__":

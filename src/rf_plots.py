@@ -1,4 +1,4 @@
-"""Report and slide figures for Student B's Random Forest experiments."""
+"""Report and slide figures for Random Forest experiments."""
 
 from __future__ import annotations
 

@@ -1,19 +1,16 @@
-"""Reproduce Student B's Random Forest work on Student A's fixed splits."""
+"""Run Random Forest experiments on the project's fixed splits."""
 
 from __future__ import annotations
 
 import json
-import platform
 import time
-from importlib.metadata import version
 
 import joblib
-import numpy as np
 import pandas as pd
 from sklearn.base import clone
 
 from src.config import (
-    FEATURE_COLUMNS, METRICS_DIR, MODELS_DIR, NOTES_DIR, PREDICTIONS_DIR,
+    FEATURE_COLUMNS, METRICS_DIR, MODELS_DIR, PREDICTIONS_DIR,
     PROCESSED_DATA_DIR, RANDOM_STATE, RESULTS_DIR, TABLES_DIR, TARGET_COLUMN,
     ensure_directories,
 )
@@ -45,7 +42,7 @@ def _evaluate(candidate, frames, splits):
     return rows, saved
 
 
-def main() -> None:
+def main() -> dict:
     ensure_directories()
     frames = check_split_files(PROCESSED_DATA_DIR)
     split_config = json.loads((PROCESSED_DATA_DIR / "split_config.json").read_text(encoding="utf-8"))
@@ -122,7 +119,7 @@ def main() -> None:
     predictions[selected["key"]].update(test_predictions)
     metrics = pd.DataFrame(metric_rows_all)
     metrics["selected_by_validation"] = metrics["model_key"].eq(selected["key"])
-    metrics.to_csv(METRICS_DIR / "student_b_rf_metrics.csv", index=False, encoding="utf-8")
+    metrics.to_csv(METRICS_DIR / "rf_metrics.csv", index=False, encoding="utf-8")
     metrics[metrics["split"] == "validation"].to_csv(TABLES_DIR / "table_09_rf_validation_metrics.csv", index=False, encoding="utf-8")
     pd.DataFrame(cv_rows).to_csv(METRICS_DIR / "rf_cv_results.csv", index=False, encoding="utf-8")
 
@@ -177,12 +174,7 @@ def main() -> None:
         "selection_lock": lock,
     }
     _write_json(RESULTS_DIR / "best_params.json", best_params)
-    _write_json(NOTES_DIR / "student_b_run_summary.json", {
-        "python": platform.python_version(),
-        "packages": {name: version(name) for name in ("numpy", "pandas", "scikit-learn", "matplotlib", "seaborn", "joblib")},
-        "selection_lock": lock,
-        "rf_test_metrics": test_rows[0],
-    })
+    summary = {"selection_lock": lock, "rf_test_metrics": test_rows[0]}
 
     plot_rf_validation(metrics)
     plot_rf_complexity(complexity)
@@ -194,7 +186,6 @@ def main() -> None:
             include_ppt=True,
         )
     print(metrics.to_string(index=False), flush=True)
+    return summary
 
 
-if __name__ == "__main__":
-    main()

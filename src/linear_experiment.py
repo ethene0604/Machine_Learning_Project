@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-import json
 import platform
 import time
 from importlib.metadata import version
-from pathlib import Path
 from typing import Any
 
 import joblib
@@ -12,16 +10,12 @@ import numpy as np
 import pandas as pd
 
 from src.config import (
-    CV_FOLDS,
     DATA_DIR,
     FEATURE_COLUMNS,
     METRICS_DIR,
     MODELS_DIR,
-    NOTES_DIR,
     PREDICTIONS_DIR,
     PROCESSED_DATA_DIR,
-    RANDOM_STATE,
-    RESULTS_DIR,
     TABLES_DIR,
     TARGET_COLUMN,
     ensure_directories,
@@ -52,13 +46,6 @@ from src.plots import (
     plot_standardized_coefficients,
 )
 from src.ridge_scratch import RidgeGradientDescent
-
-
-def _write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
 
 
 def _feature_engineering_ablation(metrics: pd.DataFrame) -> pd.DataFrame:
@@ -199,7 +186,7 @@ def _fit_from_scratch(
     return selected, selected["selection_table"]
 
 
-def main() -> None:
+def main() -> dict[str, Any]:
     started = time.perf_counter()
     ensure_directories()
     dataset_path = DATA_DIR / "california_housing.csv"
@@ -365,7 +352,7 @@ def main() -> None:
     metrics = pd.DataFrame(metric_rows)
     metrics["selected_by_validation"] = metrics["model_key"].eq(selected["key"])
     metrics.to_csv(
-        METRICS_DIR / "student_a_metrics.csv",
+        METRICS_DIR / "linear_metrics.csv",
         index=False,
         encoding="utf-8",
     )
@@ -537,8 +524,6 @@ def main() -> None:
         },
         "elapsed_seconds": time.perf_counter() - started,
     }
-    _write_json(RESULTS_DIR / "run_metadata.json", runtime)
-    _write_json(NOTES_DIR / "student_a_run_summary.json", runtime)
 
     print("\nValidation ranking")
     print(ranking.to_string(index=False))
@@ -553,7 +538,6 @@ def main() -> None:
     print("\nTest error by true-price band")
     print(error_band.to_string(index=False))
     print(f"\nCompleted in {runtime['elapsed_seconds']:.1f} seconds.")
+    return runtime
 
 
-if __name__ == "__main__":
-    main()

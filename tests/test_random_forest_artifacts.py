@@ -11,7 +11,7 @@ from src.random_forest import check_split_files
 def test_locked_rf_result_matches_saved_predictions_and_fixed_split():
     splits = check_split_files(PROCESSED_DATA_DIR)
     lock = json.loads((RESULTS_DIR / "rf_selection_lock.json").read_text(encoding="utf-8"))
-    metrics = pd.read_csv(METRICS_DIR / "student_b_rf_metrics.csv")
+    metrics = pd.read_csv(METRICS_DIR / "rf_metrics.csv")
     selected = lock["selected_model_key"]
     validation = metrics[metrics.split == "validation"]
     assert selected == validation.loc[validation.rmse.idxmin(), "model_key"]

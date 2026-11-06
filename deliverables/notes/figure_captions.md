@@ -1,6 +1,6 @@
 # 图片清单与建议图注
 
-> 下列 01–15 图是 A 阶段图片；B 的 16–21 图说明见 `student_b_handoff.md`。
+下列 01–21 图涵盖数据、线性模型、随机森林及总体比较。
 
 所有图片实际结果来自当前项目运行。报告版位于 `deliverables/figures/report/`，
 PPT 版位于 `deliverables/figures/ppt/`。
@@ -42,7 +42,7 @@ Linear Regression 和 Ridge 的性能均明显提升。
 
 ## 08_selected_model_coefficients.png
 
-**建议图注：** A 内部最优线性模型的标准化系数。`MedInc` 呈较强正向关联，
+**建议图注：** 验证集最优线性模型的标准化系数。`MedInc` 呈较强正向关联，
 纬度、经度为负向关联；这反映模型关联而非因果关系。
 
 ## 09_selected_model_split_metrics.png
@@ -79,3 +79,33 @@ y=x，但高价区域存在系统低估。
 
 **建议图注：** 按真实房价区间统计的测试误差和平均偏差。房价高于 3.0 后误差
 快速增加，约 5.0 的截断区间被严重低估。
+
+## 16_rf_validation_comparison.png
+
+**建议图注：** 同一验证集上四个随机森林候选的 RMSE。原始特征优化模型最低，
+但相对于基线的改善较小。
+
+## 17_rf_depth_complexity.png
+
+**建议图注：** 固定其他参数后不同最大深度的训练与验证 RMSE。浅树欠拟合，
+深树的训练误差持续下降；无限深度点仅作为诊断，不改变已经锁定的模型。
+
+## 18_rf_feature_importance.png
+
+**建议图注：** 锁定随机森林在验证集上的 impurity 和 permutation importance。
+`MedInc` 领先，经纬度和平均居住人数也重要；重要性不代表因果作用。
+
+## 19_rf_validation_diagnostics.png
+
+**建议图注：** 锁定随机森林在验证集的真实值—预测值与残差。高价区域更容易
+被低估，残差分布并不均匀。
+
+## 20_rf_test_diagnostics.png
+
+**建议图注：** 锁定随机森林在独立测试集的预测与残差。测试结果只用于最终
+分析，高价及截断区间误差仍较大。
+
+## 21_all_model_validation_comparison.png
+
+**建议图注：** Linear、Ridge 和随机森林候选在同一验证集上的 RMSE。
+随机森林明显优于线性模型，整体模型选择以验证集而非测试集决定。

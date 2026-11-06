@@ -1,1 +1,1 @@
-"""Student A experiment package for the California Housing project."""
+"""California Housing regression experiment package."""

@@ -1,80 +1,56 @@
-# California Housing Regression: Student A and B Experiments
+# California Housing 回归算法课程项目
 
-本目录包含同学 A 的数据、线性模型与 NumPy Ridge 实验，以及同学 B 的
-随机森林基线、五折调参、特征工程消融、复杂度和特征重要性分析。
+本项目在同一份 California Housing 数据上比较 Linear Regression、Ridge Regression
+和 Random Forest，并进行五折交叉验证、比例特征消融、模型复杂度与特征重要性分析。
+NumPy Ridge 梯度下降实现用于验证算法原理。
 
 ## 环境
 
-同学 A 原始结果记录的解释器：
-
-```text
-C:\ProgramData\anaconda3\python.exe
-Python 3.14.6
-```
-
-该路径在当前机器已不可用。同学 B 结果由 `D:\anaconda\python.exe`
-（Python 3.12.7、scikit-learn 1.5.1）生成，具体版本见
-`deliverables/notes/student_b_run_summary.json`。B 的运行依赖单独记录在
-`requirements-b.txt`，A 的环境见 `requirements.txt`。安装 B 的依赖：
+当前完整实验使用 Python 3.12.7；`requirements.txt` 固定了本次重跑环境中的
+NumPy、Pandas、Scikit-learn、Matplotlib、Seaborn 和 Joblib 版本。
 
 ```powershell
-& "D:\anaconda\python.exe" -m pip install -r requirements-b.txt
+& "D:\anaconda\python.exe" -m pip install -r requirements.txt
 ```
 
-## 运行
+在其他机器上，激活对应 Python 环境后使用 `python` 代替上面的解释器路径。
 
-数据文件已经保存在 `data/california_housing.csv`，可直接运行：
+## 一键运行
+
+在仓库根目录执行：
 
 ```powershell
-Set-Location "D:\My_projects\Machine_Learning_Project"
-& "D:\anaconda\python.exe" run_student_b.py
-& "D:\anaconda\python.exe" build_student_b_handoff.py
+& "D:\anaconda\python.exe" run_student.py
 ```
 
-`run_student_b.py` 使用现有固定划分，不会重新划分或覆盖 A 的指标。
-它会重新运行 RF 搜索和锁定模型的测试集评估；若只需重建汇总表和比较图，
-仅运行 `build_student_b_handoff.py`，不会重新预测测试集。
+运行器依次加载 `data/california_housing.csv`、生成固定的 70%/15%/15% 划分，
+完成 EDA、Linear/Ridge、NumPy Ridge 和 Random Forest 实验，再汇总指标与图表。
+首次生成全套结果约需数分钟。随机种子为 42；模型和特征方案依据训练集内交叉验证
+及独立验证集选择，测试集不用于调参。完整配置和版本记录在
+`deliverables/notes/run_summary.json`。
 
-## Jupyter quickstart
-
-适合开源分享和快速复现的单文件 Notebook：
-
-[notebooks/quickstart.ipynb](notebooks/quickstart.ipynb)
-
-打开方式：
+如只需基于已有实验文件重建汇总表和全模型比较图，可运行：
 
 ```powershell
-& "D:\anaconda\python.exe" -m pip install -r requirements-notebook.txt
-& "D:\anaconda\python.exe" -m jupyter lab notebooks/quickstart.ipynb
+& "D:\anaconda\python.exe" -m src.reporting
 ```
 
-Notebook 覆盖数据检查、固定划分、特征工程、Linear/Ridge 比较、Ridge 五折调参、
-最终预测与指标、误差分析和 NumPy Ridge 从零实现。快速运行结果集中写入
-`quickstart_results/`。
+此命令不重新拟合模型或生成测试预测。
 
-## 主要输出
+## 数据与输出
 
-- `data/processed/train.csv`、`validation.csv`、`test.csv`：同学 B 应使用的固定划分；
-- `data/processed/split_config.json`：随机种子、样本数和划分索引哈希；
-- `results/metrics/`：全部指标、Ridge 交叉验证、特征工程消融和误差分析；
-- `results/predictions/`：RF 所有候选的训练/验证预测，锁定模型的测试预测，以及 A 的预测；
-- `results/models/`：A 的线性模型、Ridge 模型和 B 锁定的 RF 模型；
-- `deliverables/figures/report/`：300 dpi 报告图片；
-- `deliverables/figures/ppt/`：适合 PPT 使用的高分辨率图片；
-- `deliverables/tables/`：可直接放入报告的 CSV 表格；
-- `deliverables/notes/`：数据方法说明、图注、结果解读和交接清单。
+- `data/california_housing.csv`：本地保存的 20,640 条数据，目标 `MedHouseVal` 的单位为 10 万美元。原始来源为 Scikit-learn California Housing 数据集。
+- `data/processed/`：固定训练、验证、测试 CSV 与划分行号哈希。
+- `results/metrics/`：模型指标、交叉验证、消融、复杂度和重要性结果。
+- `results/predictions/`：带 `row_id` 的真实值、预测值及残差。
+- `results/best_params.json`、`rf_selection_lock.json`：搜索设置与锁定方案。
+- `deliverables/tables/final_metrics.csv`：测试指标汇总；`table_13_all_validation_metrics.csv` 是同一验证集上的候选比较。
+- `deliverables/figures/report/` 与 `figures/ppt/`：报告版和 PPT 版图片。
+- `deliverables/notes/`：方法、结论、图注、表格摘要、交接说明和统一运行摘要。
 
-## 当前结果
+## 当前结论
 
-A 负责的候选中，验证集 RMSE 最低的是“原始特征 + 三个比例特征”的
-Linear Regression。其在独立测试集上的结果为：
-
-| MAE | MSE | RMSE | R² |
-|---:|---:|---:|---:|
-| 0.4735 | 0.4195 | 0.6477 | 0.6828 |
-
-MAE 和 RMSE 的单位为 10 万美元，MSE 为其平方。该模型只是 A 负责模型范围内的最优结果；
-全体模型的验证集最低 RMSE 是优化随机森林（原始特征），0.5176；
-锁定后测试集 RMSE 为 0.4884、R² 为 0.8196。汇总见
-`deliverables/tables/final_metrics.csv`，B 的交接说明见
-`deliverables/notes/student_b_handoff.md`。
+验证集 RMSE 最低的是原始 8 特征的优化随机森林，约 0.5176；锁定后测试集
+RMSE 约 0.4884、R² 约 0.8196。比例特征改善了线性模型，但未改善随机森林。
+RF 相对基线的调参收益较小，且高价截断区间仍较难预测。详细数值与适用边界见
+`deliverables/notes/handoff.md` 和 `result_findings.md`。

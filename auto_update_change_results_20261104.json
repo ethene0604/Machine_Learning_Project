@@ -1,0 +1,74 @@
+﻿[
+    {
+        "Kind":  "Service",
+        "Name":  "edgeupdate",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "edgeupdatem",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "MuseHubUpdaterService",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "OverwolfUpdater",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "WemeetUpdateSvc",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "wuauserv",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Service",
+        "Name":  "UsoSvc",
+        "Success":  true,
+        "Detail":  "Disabled startup"
+    },
+    {
+        "Kind":  "Policy",
+        "Name":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\\NoAutoUpdate",
+        "Success":  true,
+        "Detail":  "Set 1"
+    },
+    {
+        "Kind":  "Policy",
+        "Name":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\WindowsStore\\AutoDownload",
+        "Success":  true,
+        "Detail":  "Set 2"
+    },
+    {
+        "Kind":  "Policy",
+        "Name":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Office\\16.0\\Common\\officeupdate\\enableautomaticupdates",
+        "Success":  true,
+        "Detail":  "Set 0"
+    },
+    {
+        "Kind":  "RunningService",
+        "Name":  "wuauserv",
+        "Success":  true,
+        "Detail":  "Stopped"
+    },
+    {
+        "Kind":  "RunningService",
+        "Name":  "UsoSvc",
+        "Success":  true,
+        "Detail":  "Stopped"
+    }
+]
